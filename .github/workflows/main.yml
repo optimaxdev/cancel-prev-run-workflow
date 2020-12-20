@@ -1,0 +1,22 @@
+name: Main
+
+on: [push, pull_request, delete]
+
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    name: Cancel
+    timeout-minutes: 4
+    steps:
+      # To use this repository's private action, you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setting up BATS
+        run: yarn
+      - name: Compilation
+        run: tsc
+      - name: Test Step
+        uses: ./ # Uses an action in the root directory
+        with:
+          workflow_id: main.yml, longer.yml, long-task.yml, cancel-self.yml
+          github-token: ${{ github.token }}
