@@ -1,0 +1,34 @@
+name: "test -> build -> update lib if needed"
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '!**'
+jobs:
+  build-test:
+    runs-on: ubuntu-16.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        name: setup node
+        with:
+          node-version: '13.x'
+
+      - name: "check if build has changed"
+        if: success()
+        id: has-changes
+        run: |
+            echo "DIST_DIFF=$(git diff --stat -- dist)" >> $GITHUB_ENV
+      - name: "Commit files"
+        if: ${{ env.DIST_DIFF }}
+        run: |
+          git config --local user.email "buildaction@bot.bot"
+          git config --local user.name "Build action bot"
+          git commit -m "build action" -a
+      - name: "Push changes"
+        if: ${{ env.DIST_DIFF }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}

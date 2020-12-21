@@ -2,7 +2,7 @@ import { info, setFailed } from '@actions/core';
 import { context } from '@actions/github';
 import { actions, GITHUB_RUN_ID, workflowIdsFromConfig } from './config';
 
-const run = async () => {
+const run = async (): Promise<void> => {
   const {
     sha, ref, repo: { owner, repo }, payload,
   } = context;
@@ -15,6 +15,10 @@ const run = async () => {
     branch = payload.pull_request.head.ref;
     headSha = payload.pull_request.head.sha;
   }
+
+  console.info({
+    sha, headSha, branch, owner, repo, GITHUB_RUN_ID,
+  });
 
   const workflowIdsToCancel: string[] = [];
 
@@ -71,3 +75,5 @@ const run = async () => {
 run()
   .then(() => info('Cancel Complete.'))
   .catch((e) => setFailed(e.message));
+
+export default run;

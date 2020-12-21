@@ -3,21 +3,24 @@
   "version": "0.0.1",
   "private": true,
   "description": "This is a GitHub Action that will cancel any previous runs that are not completed for a given workflow.",
-  "main": "dist/index.js",
+  "main": "dist/main.js",
   "repository": "git@github.com:optimaxdev/cancel-prev-run-workflow.git",
   "author": "optimaxdev <optimaxdev@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "test": "jest --watch",
+    "test:ci": "jest --ci --reporters='default' --reporters='./github-actions-reporter'",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
-    "build": "yarn ncc build src/index.ts"
+    "build": "yarn ncc build src/main.ts"
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.19",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.1",
     "@vercel/ncc": "^0.25.1",
@@ -25,8 +28,12 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.3",
     "eslint-plugin-prettier": "^3.2.0",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^9.1.1",
     "typescript": "^4.1.2"
   }
 }

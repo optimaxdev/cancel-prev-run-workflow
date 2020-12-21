@@ -1,13 +1,14 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier", "import"],
+  "plugins": ["@typescript-eslint", "prettier", "import", "jest"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
-    "airbnb-base"
+    "airbnb-base",
+    "plugin:jest/all"
   ],
   "rules": {
     "no-console": "off",
@@ -21,6 +22,9 @@
         "tsx": "never"
       }
     ]
+  },
+  "env": {
+    "jest/globals": true
   },
   "settings": {
     "import/parsers": {

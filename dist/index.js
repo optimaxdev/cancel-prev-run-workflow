@@ -1461,7 +1461,7 @@ exports.Octokit = Octokit;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var isPlainObject = __webpack_require__(287);
+var isPlainObject = __webpack_require__(558);
 var universalUserAgent = __webpack_require__(429);
 
 function lowercaseKeys(object) {
@@ -1847,6 +1847,52 @@ const endpoint = withDefaults(null, DEFAULTS);
 
 exports.endpoint = endpoint;
 //# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
+/***/ 558:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+/*!
+ * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
+ *
+ * Copyright (c) 2014-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+function isObject(o) {
+  return Object.prototype.toString.call(o) === '[object Object]';
+}
+
+function isPlainObject(o) {
+  var ctor,prot;
+
+  if (isObject(o) === false) return false;
+
+  // If has modified constructor
+  ctor = o.constructor;
+  if (ctor === undefined) return true;
+
+  // If has modified prototype
+  prot = ctor.prototype;
+  if (isObject(prot) === false) return false;
+
+  // If constructor does not have an Object-specific method
+  if (prot.hasOwnProperty('isPrototypeOf') === false) {
+    return false;
+  }
+
+  // Most likely a plain Object
+  return true;
+}
+
+exports.isPlainObject = isPlainObject;
 
 
 /***/ }),
@@ -3323,7 +3369,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var endpoint = __webpack_require__(440);
 var universalUserAgent = __webpack_require__(429);
-var isPlainObject = __webpack_require__(287);
+var isPlainObject = __webpack_require__(62);
 var nodeFetch = _interopDefault(__webpack_require__(467));
 var requestError = __webpack_require__(537);
 
@@ -3463,6 +3509,52 @@ const request = withDefaults(endpoint.endpoint, {
 
 exports.request = request;
 //# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
+/***/ 62:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+/*!
+ * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
+ *
+ * Copyright (c) 2014-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+function isObject(o) {
+  return Object.prototype.toString.call(o) === '[object Object]';
+}
+
+function isPlainObject(o) {
+  var ctor,prot;
+
+  if (isObject(o) === false) return false;
+
+  // If has modified constructor
+  ctor = o.constructor;
+  if (ctor === undefined) return true;
+
+  // If has modified prototype
+  prot = ctor.prototype;
+  if (isObject(prot) === false) return false;
+
+  // If constructor does not have an Object-specific method
+  if (prot.hasOwnProperty('isPrototypeOf') === false) {
+    return false;
+  }
+
+  // Most likely a plain Object
+  return true;
+}
+
+exports.isPlainObject = isPlainObject;
 
 
 /***/ }),
@@ -3667,52 +3759,6 @@ class Deprecation extends Error {
 }
 
 exports.Deprecation = Deprecation;
-
-
-/***/ }),
-
-/***/ 287:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-/*!
- * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
- *
- * Copyright (c) 2014-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-function isObject(o) {
-  return Object.prototype.toString.call(o) === '[object Object]';
-}
-
-function isPlainObject(o) {
-  var ctor,prot;
-
-  if (isObject(o) === false) return false;
-
-  // If has modified constructor
-  ctor = o.constructor;
-  if (ctor === undefined) return true;
-
-  // If has modified prototype
-  prot = ctor.prototype;
-  if (isObject(prot) === false) return false;
-
-  // If constructor does not have an Object-specific method
-  if (prot.hasOwnProperty('isPrototypeOf') === false) {
-    return false;
-  }
-
-  // Most likely a plain Object
-  return true;
-}
-
-exports.isPlainObject = isPlainObject;
 
 
 /***/ }),
@@ -5786,7 +5832,7 @@ exports.actions = github_1.getOctokit(exports.githubToken).actions;
 
 /***/ }),
 
-/***/ 144:
+/***/ 399:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -5850,6 +5896,7 @@ const run = async () => {
 run()
     .then(() => core_1.info('Cancel Complete.'))
     .catch((e) => core_1.setFailed(e.message));
+exports.default = run;
 
 
 /***/ }),
@@ -6004,6 +6051,6 @@ module.exports = require("zlib");;
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(144);
+/******/ 	return __webpack_require__(399);
 /******/ })()
 ;
